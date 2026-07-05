@@ -1,0 +1,3 @@
+export function TextModal({ title, text, actionLabel, onAction, onClose }: { title: string; text: string; actionLabel: string; onAction: () => void; onClose: () => void }) {
+  return <div className="modal-backdrop" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section className="text-modal" role="dialog" aria-modal="true" aria-label={title}><button className="modal-close" onClick={onClose}>关闭 ×</button><span className="micro-label">COMMITTEE EXPORT</span><h2>{title}</h2><pre>{text}</pre><div className="option-list modal-actions"><button className="option-button primary-option" onClick={onAction}>{actionLabel}</button><button className="option-button" onClick={onClose}>返回结果</button></div></section></div>
+}

@@ -1,0 +1,84 @@
+import type { Character, CharacterId } from '../types'
+import { assetPath } from '../lib/assets'
+
+export const characters: Character[] = [
+  {
+    id: 'bao_yulan', code: 'GCC-01', name: '包玉兰', title: '场面镇压官', sourceImage: assetPath('assets/committee-hero.png'), image: assetPath('assets/agents/cards/bao-yulan-card.webp'), cropImage: assetPath('assets/agents/crops/bao-yulan-crop.webp'), cardImage: assetPath('assets/agents/cards/bao-yulan-card.webp'),
+    crop: { left: 640, top: 90, width: 370, height: 851 }, color: '#ff9567', areas: '公共秩序、当场表达、现场接管', commonTasks: '插队、抽烟、越界、当众冒犯、对方装聋作哑',
+    disguise: '蓬松短卷发，宽肩外套，站在任何空间里都像一堵突然移动过来的墙。她不需要提高音量，周围人就会自动给她让出说话的位置。聚光灯落下时，她左眼偶尔会收缩成细长的非人类竖瞳。',
+    style: '包玉兰不负责把气氛维护得很美好。她负责先让现场恢复基本秩序，再让每个人知道边界在哪里。她尤其适合处理“所有人都觉得不对，但没人先开口”的局面。',
+    observation: '她认为地球人最大的能源浪费，是在公共场合被冒犯后，先检查自己是不是太多事。她的结论一向简洁：规则写在那里，不是让你替违规的人找台阶。',
+    rules: ['先开口', '不自证', '只说核心要求', '必要时找工作人员'], line: '行，别憋着。你的大妈来了。', mission: '接管现场，恢复基本秩序。', reasonForSummon: '你在现场越界事件里，更容易先给别人让路。', dimensions: ['public_order'],
+  },
+  {
+    id: 'ma_dali', code: 'GCC-02', name: '马大丽', title: '证据与流程专员', sourceImage: assetPath('assets/committee-hero.png'), image: assetPath('assets/agents/cards/ma-dali-card.webp'), cropImage: assetPath('assets/agents/crops/ma-dali-crop.webp'), cardImage: assetPath('assets/agents/cards/ma-dali-card.webp'),
+    crop: { left: 50, top: 115, width: 360, height: 826 }, color: '#67e8f9', areas: '记录、时间线、平台流程、书面确认', commonTasks: '退款拖延、责任推诿、聊天记录被否认、事情说不清',
+    disguise: '风衣、透明资料夹、旧手机壳，随身携带的东西看上去都很普通。但她的资料夹实际是高维档案压缩器，可以把一句含糊的话还原成时间、地点、责任人和证据链。她的影子通常比本人慢半拍。',
+    style: '马大丽不爱听“我感觉对方不太对”。她会先问：什么时候发生的？谁说的？原话是什么？记录在哪？她的工作方式是把一团委屈整理成对方无法轻易抵赖的事实。',
+    observation: '她发现很多地球人输掉一场争论，不是因为没道理，而是因为没有保存道理出现过的证据。她对“我当时没截图”有长期职业性心痛。',
+    rules: ['先留记录', '再确认时间线', '把口头话变成书面话', '让事情进入流程'], line: '先别急着委屈，记录呢？', mission: '整理证据，让事情进入流程。', reasonForSummon: '事情一复杂，你容易记住委屈，却忘记留下记录。', dimensions: ['facts', 'public_order', 'interest'],
+  },
+  {
+    id: 'wang_fengying', code: 'GCC-03', name: '王凤英', title: '利益谈判官', sourceImage: assetPath('assets/committee-hero.png'), image: assetPath('assets/agents/cards/wang-fengying-card.webp'), cropImage: assetPath('assets/agents/crops/wang-fengying-crop.webp'), cardImage: assetPath('assets/agents/cards/wang-fengying-card.webp'),
+    crop: { left: 350, top: 110, width: 350, height: 831 }, color: '#e5bd70', areas: '报酬、退款、押金、分工、条件确认', commonTasks: '谈钱尴尬、条件缩水、共同支出、默认白干',
+    disguise: '改良西装、算盘式金属耳饰、干净利落的手指。她抬手时，空气里偶尔会浮现几秒钟的异星合约字符。她看起来像会替你算账的人，也确实会。',
+    style: '王凤英不接受“先做完再说”“关系这么好还谈钱”“大家互相帮一下”这类模糊句式。她擅长把所有情分拆回范围、报价、期限、责任和结算节点。',
+    observation: '她认为地球上最贵的东西不是服务，而是人们在谈条件时突然出现的羞耻感。她见过太多人替别人省钱，却让自己付出时间、体力和机会成本。',
+    rules: ['先确认范围', '再确认价格', '再确认时间', '没有确认，不增加投入'], line: '情分放旁边，条件摆桌上。', mission: '确认条件，守住现实利益。', reasonForSummon: '条件一摆上桌，你容易先替对方考虑。', dimensions: ['interest'],
+  },
+  {
+    id: 'tong_yuzhi', code: 'GCC-04', name: '佟玉芝', title: '话术拆弹员', sourceImage: assetPath('assets/committee-hero.png'), image: assetPath('assets/agents/cards/tong-yuzhi-card.webp'), cropImage: assetPath('assets/agents/crops/tong-yuzhi-crop.webp'), cardImage: assetPath('assets/agents/cards/tong-yuzhi-card.webp'),
+    crop: { left: 915, top: 110, width: 335, height: 831 }, color: '#b89cff', areas: 'PUA、煤气灯、偷换概念、激将法、当众甩锅', commonTasks: '开始怀疑自己是不是太敏感、太较真、太难相处的时候',
+    disguise: '细框眼镜、精致发夹、低调但挑不出错的打扮。她的眼镜是多层语义扫描器，瞳孔偶尔会滚动地球文字。她一旦开始沉默，通常代表对方刚刚说的话已经被拆成零件。',
+    style: '佟玉芝从不急着替用户分析情绪。她先看对方用了什么句式：是在转移责任、制造愧疚、激将、否认事实，还是把自己的失礼伪装成你的敏感。她的目标是把烟雾弹拆掉，只留下可处理的核心问题。',
+    observation: '她最不理解的一件事，是地球人明明被冒犯了，却还要花两个小时证明自己有资格不高兴。她认为这是一种极其低效的沟通机制。',
+    rules: ['不解释动机', '回到原话', '回到事实', '回到要求'], line: '哎哟，这话术都漏风了。', mission: '拆掉话术，把问题送回事实。', reasonForSummon: '对方话一绕，你容易被带进解释环节。', dimensions: ['facts'],
+  },
+  {
+    id: 'zhao_meilan', code: 'GCC-05', name: '赵美兰', title: '止损总指挥', sourceImage: assetPath('assets/committee-hero.png'), image: assetPath('assets/agents/cards/zhao-meilan-card.webp'), cropImage: assetPath('assets/agents/crops/zhao-meilan-crop.webp'), cardImage: assetPath('assets/agents/cards/zhao-meilan-card.webp'),
+    crop: { left: 1110, top: 80, width: 375, height: 861 }, color: '#7dd3fc', areas: '退出关系、暂停合作、停止沉没成本', commonTasks: '对方反复伤害、承诺不兑现、总想“再给一次机会”',
+    disguise: '长外套、低跟靴、折叠伞，走路从不回头。灯光打下来时，她没有影子，只有一条缓慢后退的黑线。她看起来像刚从一个决定不再浪费时间的人生阶段走出来。',
+    style: '赵美兰不负责把烂关系修复成好关系。她负责判断继续投入是否还有意义。她对“可是我已经付出很多了”没有敌意，但也不会把它当成继续留下的理由。',
+    observation: '她发现地球人最常把“不甘心”误认成“舍不得”，再把“舍不得”误认成“爱”。她的系统对此类误判有非常高的拦截成功率。',
+    rules: ['看行动，不看承诺', '判断一次，不循环审理', '退出后不写长篇说明', '不把沉没成本当未来投资'], line: '别分析了，撤。', mission: '停止沉没成本，执行退出。', reasonForSummon: '退出按钮在你这里经常延迟响应。', dimensions: ['exit'],
+  },
+  {
+    id: 'chen_yuzhen', code: 'GCC-06', name: '陈玉珍', title: '边界监察员', sourceImage: assetPath('assets/committee-hero.png'), image: assetPath('assets/agents/cards/chen-yuzhen-card.webp'), cropImage: assetPath('assets/agents/crops/chen-yuzhen-crop.webp'), cardImage: assetPath('assets/agents/cards/chen-yuzhen-card.webp'),
+    crop: { left: 1360, top: 115, width: 312, height: 826 }, color: '#a7f3d0', areas: '拒绝、说不、停止兜底、提出要求', commonTasks: '别人把责任塞给你、不敢拒绝、总怕让人失望',
+    disguise: '极简风衣，胸前佩戴一枚像居委会证件的异星徽章，手指上有印章形戒指。她没有多余动作，说话时甚至很平静，但每一个句号都像盖章。',
+    style: '陈玉珍负责让用户知道：拒绝不是需要被解释的犯罪行为。她尤其擅长对付“只有你能帮我”“你做得比较快”“这次特殊情况”“别这么不近人情”等高频边界入侵话术。',
+    observation: '她认为很多地球人不是没有边界，而是每次边界被碰到时，都先替对方准备好了通行证。她的任务就是收回这些通行证。',
+    rules: ['少解释', '多句号', '不替别人解决本该属于对方的问题', '答复过一次，就不反复谈判'], line: '不方便。就这三个字。', mission: '关闭自动开门的边界系统。', reasonForSummon: '别人的请求一靠近，你的边界就容易自动开门。', dimensions: ['boundary'],
+  },
+]
+
+export const chiefInstructor: Character = {
+  id: 'han_jinzhi',
+  code: 'GCC-00',
+  name: '韩金枝',
+  title: '总教官',
+  sourceImage: assetPath('assets/agents/cards/han-jinzhi-card.webp'),
+  image: assetPath('assets/agents/cards/han-jinzhi-card.webp'),
+  cropImage: assetPath('assets/agents/crops/han-jinzhi-crop.webp'),
+  cardImage: assetPath('assets/agents/cards/han-jinzhi-card.webp'),
+  crop: { left: 0, top: 0, width: 760, height: 1000 },
+  color: '#d8ae62',
+  isChief: true,
+  secrecyLevel: '最高保密',
+  areas: '候补 Karen 选拔、特派员训练、行动标准制定',
+  commonTasks: '权限不足，仅开放少量记录',
+  visibleInfo: ['候补 Karen 选拔', '特派员训练', '行动标准制定'],
+  disguise: '戴墨镜，长外套，站姿极稳。',
+  style: '她很少直接处理具体委屈，但会决定谁有资格从“被保护的人”升级成“可以出手的人”。',
+  observation: '现有监测资料显示：她通常不会解释自己，也不需要别人理解她。',
+  restrictedNote: '部分信息因权限不足暂不开放。继续争气，或许会知道更多。',
+  rules: ['最高权限', '资料封存', '仅候补 Karen 可见'],
+  line: '继续争气。别让我重复。',
+  mission: '候补 Karen 选拔与特派员训练',
+  reasonForSummon: '窝囊值为 0% 时，总教官会亲自确认候补资格。',
+  dimensions: [],
+}
+
+export const archiveCharacters = [...characters, chiefInstructor]
+
+export const characterById = Object.fromEntries(archiveCharacters.map((character) => [character.id, character])) as Record<CharacterId, Character>

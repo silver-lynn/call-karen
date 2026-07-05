@@ -1,0 +1,62 @@
+import { useEffect, useMemo, useState } from 'react'
+import { SiteShell } from './components/SiteShell'
+import { getResultTier } from './data/resultTiers'
+import { questionPacks } from './data/questionPacks'
+import { assignAgents } from './lib/assignAgents'
+import { getPackId } from './lib/mbtiPack'
+import { calculateDimensionScores, calculateScore } from './lib/scoring'
+import { Agents } from './pages/Agents'
+import { Home } from './pages/Home'
+import { MbtiFlow } from './pages/MbtiFlow'
+import { Quiz } from './pages/Quiz'
+import { Result } from './pages/Result'
+import type { Dimension, OptionId } from './types'
+
+type Screen = 'home' | 'mbti' | 'quiz' | 'result'
+
+const weaknessLabels: Record<Dimension, string> = {
+  public_order: '公共秩序与当场表达', facts: '不自证、记录与事实回收', interest: '利益维护与条件确认', boundary: '拒绝、分工与责任边界', exit: '及时止损与退出', rhetoric: '话术拆弹与停止自证',
+}
+
+export default function App() {
+  const [path, setPath] = useState(window.location.pathname)
+  const [screen, setScreen] = useState<Screen>('home')
+  const [mbtiParts, setMbtiParts] = useState<string[]>(['', '', '', ''])
+  const [mbtiStep, setMbtiStep] = useState(0)
+  const [questionIndex, setQuestionIndex] = useState(0)
+  const [answers, setAnswers] = useState<OptionId[]>([])
+
+  useEffect(() => {
+    const onPopState = () => setPath(window.location.pathname)
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [])
+
+  const navigate = (nextPath: string) => { window.history.pushState({}, '', nextPath); setPath(nextPath); window.scrollTo({ top: 0 }) }
+  const mbti = mbtiParts.join('')
+  const packId = getPackId(mbti)
+  const pack = questionPacks[packId]
+  const score = useMemo(() => calculateScore(pack.questions, answers), [pack, answers])
+  const dimensionScores = useMemo(() => calculateDimensionScores(pack.questions, answers), [pack, answers])
+  const tier = useMemo(() => getResultTier(score), [score])
+  const agents = useMemo(() => assignAgents(dimensionScores, tier.count, packId), [dimensionScores, tier.count, packId])
+  const weaknesses = useMemo(() => (Object.entries(dimensionScores) as [Dimension, number][]).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([dimension]) => weaknessLabels[dimension]).join('、'), [dimensionScores])
+
+  useEffect(() => {
+    if (screen !== 'result') return
+    localStorage.setItem('karen-last-result', JSON.stringify({ mbti, score, tier: tier.id, characterIds: agents.map((agent) => agent.id), createdAt: new Date().toISOString() }))
+  }, [screen, mbti, score, tier.id, agents])
+
+  const start = () => { setMbtiParts(['', '', '', '']); setMbtiStep(0); setAnswers([]); setQuestionIndex(0); setScreen('mbti'); window.scrollTo({ top: 0 }) }
+  const selectMbti = (value: string) => { const next = [...mbtiParts]; next[mbtiStep] = value; setMbtiParts(next); window.setTimeout(() => setMbtiStep((step) => Math.min(4, step + 1)), 150) }
+  const backMbti = () => { if (mbtiStep > 0) setMbtiStep((step) => step - 1); else setScreen('home') }
+  const answerQuestion = (id: OptionId) => { const next = [...answers]; next[questionIndex] = id; setAnswers(next); if (questionIndex < 4) window.setTimeout(() => setQuestionIndex((index) => index + 1), 170); else window.setTimeout(() => { setScreen('result'); window.scrollTo({ top: 0 }) }, 220) }
+  const backQuestion = () => { if (questionIndex > 0) setQuestionIndex((index) => index - 1); else { setMbtiStep(4); setScreen('mbti') } }
+  const home = () => { if (path !== '/') navigate('/'); setScreen('home') }
+
+  if (path === '/agents') return <SiteShell compact onHome={home} onAgents={() => navigate('/agents')}><Agents onBack={home} /></SiteShell>
+  if (screen === 'home') return <SiteShell onHome={home} onAgents={() => navigate('/agents')}><Home onStart={start} onAgents={() => navigate('/agents')} /></SiteShell>
+  if (screen === 'mbti') return <SiteShell compact onHome={home} onAgents={() => navigate('/agents')}><MbtiFlow parts={mbtiParts} step={mbtiStep} onBack={backMbti} onSelect={selectMbti} onContinue={() => { setQuestionIndex(0); setAnswers([]); setScreen('quiz') }} /></SiteShell>
+  if (screen === 'quiz') return <SiteShell compact onHome={home} onAgents={() => navigate('/agents')}><Quiz pack={pack} current={questionIndex} answers={answers} onBack={backQuestion} onAnswer={answerQuestion} /></SiteShell>
+  return <SiteShell compact onHome={home} onAgents={() => navigate('/agents')}><Result mbti={mbti} score={score} tier={tier} agents={agents} weaknesses={weaknesses} dimensionScores={dimensionScores} onAgents={() => navigate('/agents')} onRestart={start} /></SiteShell>
+}
