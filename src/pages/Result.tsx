@@ -40,7 +40,10 @@ export function Result({ userName, mbti, score, tier, agents, weaknesses, dimens
       </div>
       <div className="result-hero-visual">
         <SummonStage agents={agents} tier={tier} />
-        <StyledSiteQRCode className="result-qr-card" size={126} />
+      </div>
+      <div className="result-share-pass">
+        <p><b>转发给下一个地球人</b><span>紫白通行码已生成，可直接扫码进入检测站。</span></p>
+        <StyledSiteQRCode className="result-qr-card" size={88} />
       </div>
     </div>
     {tier.id === 'candidate'

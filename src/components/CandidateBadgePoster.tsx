@@ -60,31 +60,32 @@ function setFittedFont(ctx: CanvasRenderingContext2D, text: string, maxWidth: nu
 }
 
 async function drawQrPass(ctx: CanvasRenderingContext2D) {
-  const x = 760
-  const y = 1188
-  const width = 270
-  const height = 252
-  drawRoundedRect(ctx, x, y, width, height, 24)
+  const x = 805
+  const y = 1202
+  const width = 230
+  const height = 212
+  const qrSize = 126
+  drawRoundedRect(ctx, x, y, width, height, 22)
   ctx.fillStyle = 'rgba(4,9,15,.82)'
   ctx.fill()
-  ctx.strokeStyle = 'rgba(216,174,98,.58)'
+  ctx.strokeStyle = 'rgba(167,139,250,.64)'
   ctx.lineWidth = 2
   ctx.stroke()
   ctx.fillStyle = '#f1d291'
-  ctx.font = '800 22px "Noto Sans SC", Arial, sans-serif'
+  ctx.font = '800 19px "Noto Sans SC", Arial, sans-serif'
   ctx.textAlign = 'center'
-  ctx.fillText('地球分部通行码', x + width / 2, y + 38)
+  ctx.fillText('地球分部通行码', x + width / 2, y + 33)
 
-  const qrUrl = await createSiteQrDataUrl(168)
+  const qrUrl = await createSiteQrDataUrl(qrSize)
   const qr = await loadImage(qrUrl)
-  drawRoundedRect(ctx, x + 51, y + 56, 168, 168, 14)
+  drawRoundedRect(ctx, x + 52, y + 49, qrSize, qrSize, 13)
   ctx.fillStyle = '#ffffff'
   ctx.fill()
-  ctx.drawImage(qr, x + 51, y + 56, 168, 168)
+  ctx.drawImage(qr, x + 52, y + 49, qrSize, qrSize)
 
   ctx.fillStyle = '#b7c7d4'
-  ctx.font = '700 18px "Noto Sans SC", Arial, sans-serif'
-  ctx.fillText('扫码检测你的窝囊值', x + width / 2, y + 236)
+  ctx.font = '700 15px "Noto Sans SC", Arial, sans-serif'
+  ctx.fillText('扫码检测你的窝囊值', x + width / 2, y + 193)
 }
 
 export async function renderCandidateBadgePoster(userName: string, mbti: string) {
@@ -216,7 +217,7 @@ export function CandidateBadgePoster({ userName, mbti, onDownload, onClose }: { 
           <p>委员会确认：你暂不需要救助。</p>
           <p>现向你发出候补 Karen 邀请。</p>
         </div>
-        <StyledSiteQRCode className="poster-qr" size={92} />
+        <StyledSiteQRCode className="poster-qr" size={76} />
         <div className="poster-signature"><p>地球分部签发</p><p>总教官 韩金枝</p></div>
         <div className="poster-footer">总教官已注意到你。</div>
       </div>

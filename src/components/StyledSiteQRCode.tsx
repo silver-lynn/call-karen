@@ -7,7 +7,7 @@ type StyledSiteQRCodeProps = {
   caption?: string
 }
 
-export function StyledSiteQRCode({ className = '', size = 132, caption = '扫码检测你的窝囊值' }: StyledSiteQRCodeProps) {
+export function StyledSiteQRCode({ className = '', size = 104, caption = '扫码检测你的窝囊值' }: StyledSiteQRCodeProps) {
   const [dataUrl, setDataUrl] = useState('')
 
   useEffect(() => {

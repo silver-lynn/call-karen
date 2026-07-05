@@ -48,13 +48,13 @@ header nav i { display: inline-block; width: 7px; height: 7px; border-radius: 50
 .name-input-card input::placeholder { color: #50687a; font-weight: 600; }
 .name-input-card small { display: block; margin-top: 12px; color: #6f879a; line-height: 1.65; }
 
-.site-qr-card { position: relative; display: inline-flex; flex-direction: column; align-items: center; padding: 13px; border: 1px solid rgba(216,174,98,.42); border-radius: 22px; background: rgba(4,9,15,.72); box-shadow: 0 0 34px rgba(139,92,246,.24), inset 0 0 28px rgba(103,232,249,.08); backdrop-filter: blur(10px); text-align: center; }
-.site-qr-card::before { content: ''; position: absolute; inset: 7px; border: 1px solid rgba(103,232,249,.16); border-radius: 16px; pointer-events: none; }
-.site-qr-title { position: relative; z-index: 1; margin-bottom: 9px; color: #f1d291; font: 900 11px monospace; letter-spacing: .18em; }
-.site-qr-inner { position: relative; z-index: 1; display: inline-grid; place-items: center; padding: 9px; border-radius: 14px; background: #fff; box-shadow: 0 0 18px rgba(255,255,255,.16); }
+.site-qr-card { position: relative; display: inline-flex; flex-direction: column; align-items: center; padding: 10px; border: 1px solid rgba(167,139,250,.55); border-radius: 18px; background: rgba(4,9,15,.76); box-shadow: 0 0 24px rgba(109,40,217,.26), inset 0 0 24px rgba(103,232,249,.06); backdrop-filter: blur(10px); text-align: center; }
+.site-qr-card::before { content: ''; position: absolute; inset: 6px; border: 1px solid rgba(167,139,250,.2); border-radius: 13px; pointer-events: none; }
+.site-qr-title { position: relative; z-index: 1; margin-bottom: 7px; color: #f1d291; font: 900 10px monospace; letter-spacing: .16em; }
+.site-qr-inner { position: relative; z-index: 1; display: inline-grid; place-items: center; padding: 7px; border-radius: 12px; background: #fff; box-shadow: 0 0 16px rgba(167,139,250,.24); }
 .site-qr-inner img { display: block; width: auto; height: auto; }
-.site-qr-inner span { display: grid; place-items: center; width: 132px; height: 132px; color: #111; font-weight: 900; }
-.site-qr-caption { position: relative; z-index: 1; margin-top: 9px; color: #c5d4df; font-size: 12px; letter-spacing: .08em; }
+.site-qr-inner span { display: grid; place-items: center; width: 104px; height: 104px; color: #6d28d9; font-weight: 900; }
+.site-qr-caption { position: relative; z-index: 1; margin-top: 7px; color: #c5d4df; font-size: 11px; letter-spacing: .06em; }
 
 .creator-links { position: relative; z-index: 2; margin: 34px auto 0; display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 20px; align-items: center; padding: 24px; border: 1px solid rgba(255,255,255,.11); border-radius: 30px; background: linear-gradient(145deg, rgba(7,17,28,.86), rgba(4,9,15,.88)); box-shadow: 0 20px 60px rgba(0,0,0,.22); text-align: left; }
 .creator-links-compact { grid-template-columns: 1fr; margin-top: 28px; }
@@ -203,7 +203,12 @@ header nav i { display: inline-block; width: 7px; height: 7px; border-radius: 50
 .result-hero-copy { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
 .result-hero-visual { position: relative; min-width: 0; }
 .result-hero-visual .summon-stage, .result-hero-visual .candidate-stage { margin: 0; height: 100%; min-height: 520px; }
-.result-qr-card { position: absolute; right: 18px; bottom: 18px; z-index: 8; }
+.result-share-pass { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px 16px 14px 18px; border: 1px solid rgba(167,139,250,.28); border-radius: 22px; background: linear-gradient(90deg, rgba(20,13,45,.48), rgba(5,13,22,.72)); box-shadow: inset 0 0 22px rgba(109,40,217,.12); text-align: left; }
+.result-share-pass p { margin: 0; color: #9dafbf; line-height: 1.55; }
+.result-share-pass b, .result-share-pass span { display: block; }
+.result-share-pass b { margin-bottom: 4px; color: #f1d291; font-size: 15px; letter-spacing: .08em; }
+.result-share-pass span { font-size: 13px; }
+.result-qr-card { flex: 0 0 auto; }
 .wonang-score-card { position: relative; overflow: hidden; margin: 0 auto 28px; padding: 35px 24px 38px; border: 1px solid #d8ae6270; border-radius: 30px; background: radial-gradient(circle at 50% 0,#293c5b 0,#08131f 45%,#050911 100%); box-shadow: inset 0 0 48px #67e8f916, 0 0 42px #8b5cf632; }
 .wonang-score-card::before { content: ''; position: absolute; inset: 12px; border: 1px dashed #67e8f94d; border-radius: 22px; animation: pulse 2s infinite; }
 .wonang-score-card::after { content: ''; position: absolute; left: -10%; right: -10%; top: 48%; height: 2px; background: #67e8f9; opacity: .22; box-shadow: 0 0 18px #67e8f9; animation: scanY 3.8s linear infinite; }
@@ -304,7 +309,7 @@ header nav i { display: inline-block; width: 7px; height: 7px; border-radius: 50
 .poster-dynamic-line { margin-top: 4px; color: #f1d291; font-size: clamp(19px, 5vw, 28px); font-weight: 900; white-space: nowrap; text-shadow: 0 0 18px #ffffff35; }
 .poster-copy { margin-top: 10px; color: #b8c9d6; line-height: 1.55; font-weight: 600; }
 .poster-copy p { margin: 2px 0; }
-.poster-qr { margin: 10px 0 8px; transform: scale(.78); transform-origin: center; }
+.poster-qr { margin: 8px 0 6px; transform: scale(.86); transform-origin: center; }
 .poster-qr .site-qr-title { margin-bottom: 6px; font-size: 10px; }
 .poster-qr .site-qr-inner { padding: 7px; }
 .poster-qr .site-qr-caption { margin-top: 6px; font-size: 10px; }
@@ -346,7 +351,8 @@ header nav i { display: inline-block; width: 7px; height: 7px; border-radius: 50
   .creator-xhs-card { max-width: 240px; margin: 0 auto; }
   .result-hero-share { grid-template-columns: 1fr; }
   .result-hero-visual .summon-stage, .result-hero-visual .candidate-stage { min-height: 520px; }
-  .result-qr-card { position: static; margin: 14px auto 0; }
+  .result-share-pass { align-items: center; }
+  .result-qr-card { margin: 0; }
   .agents-banner { height: 300px; }
   .archive-grid { grid-template-columns: 1fr 1fr; }
   .archive-card.open { grid-column: span 2; }
@@ -376,6 +382,7 @@ header nav i { display: inline-block; width: 7px; height: 7px; border-radius: 50
   .creator-actions { flex-direction: column; }
   .result-page { width: min(calc(100% - 24px), 520px); }
   .result-hero-share { padding: 12px; border-radius: 24px; }
+  .result-share-pass { flex-direction: column; padding: 16px 12px; text-align: center; }
   .score-number { font-size: clamp(76px, 24vw, 118px); }
   .score-label { font-size: clamp(20px, 7vw, 28px); letter-spacing: .06em; text-indent: .06em; }
   .result-hero-visual .summon-stage, .result-hero-visual .candidate-stage { min-height: 500px; }

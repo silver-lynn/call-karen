@@ -9,13 +9,13 @@ export function getSiteUrl() {
   return new URL(import.meta.env.BASE_URL || '/', origin).href.replace(/\/$/, '')
 }
 
-export async function createSiteQrDataUrl(size = 132) {
+export async function createSiteQrDataUrl(size = 104) {
   return QRCode.toDataURL(getSiteUrl(), {
     errorCorrectionLevel: 'M',
-    margin: 0,
+    margin: 1,
     width: size,
     color: {
-      dark: '#111111',
+      dark: '#6d28d9',
       light: '#ffffff',
     },
   })
