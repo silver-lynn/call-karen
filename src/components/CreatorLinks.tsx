@@ -9,12 +9,7 @@ export function CreatorLinks({ compact = false }: { compact?: boolean }) {
       <p className="creator-note">{CREATOR_NOTE}</p>
       <div className="creator-actions">
         <a href={CREATOR_LINKS.github} target="_blank" rel="noreferrer">关注我的 GitHub</a>
-        <a href={CREATOR_LINKS.xiaohongshu} target="_blank" rel="noreferrer">去小红书找我</a>
       </div>
     </div>
-    {!compact && <a className="creator-xhs-card" href={CREATOR_LINKS.xiaohongshu} target="_blank" rel="noreferrer" aria-label="打开小红书二维码">
-      <img src={CREATOR_LINKS.xiaohongshu} alt="SilverLynn 银凌的小红书二维码" />
-      <span>扫码去小红书找 SilverLynn 银凌</span>
-    </a>}
   </section>
 }
