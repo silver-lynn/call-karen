@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react'
 import { AgentCard } from '../components/AgentCard'
 import { CandidateBadgePoster, downloadCandidateBadgePoster } from '../components/CandidateBadgePoster'
+import { CreatorLinks } from '../components/CreatorLinks'
 import { RehabPrescriptionCard } from '../components/RehabPrescriptionCard'
+import { StyledSiteQRCode } from '../components/StyledSiteQRCode'
 import { SummonStage } from '../components/SummonStage'
 import { TextModal } from '../components/TextModal'
 import { WonangScoreBadge } from '../components/WonangScoreBadge'
@@ -16,24 +18,31 @@ async function copyText(text: string) {
   }
 }
 
-export function Result({ mbti, score, tier, agents, weaknesses, dimensionScores, onAgents, onRestart }: { mbti: string; score: number; tier: ResultTier; agents: Character[]; weaknesses: string; dimensionScores: Record<Dimension, number>; onAgents: () => void; onRestart: () => void }) {
+export function Result({ userName, mbti, score, tier, agents, weaknesses, dimensionScores, onAgents, onRestart }: { userName: string; mbti: string; score: number; tier: ResultTier; agents: Character[]; weaknesses: string; dimensionScores: Record<Dimension, number>; onAgents: () => void; onRestart: () => void }) {
   const [modal, setModal] = useState<'prompt' | 'soul' | 'poster' | null>(null)
   const [toast, setToast] = useState('')
   const { topDimensionLabel, prescription } = useMemo(() => selectRehabPrescription(score, dimensionScores), [score, dimensionScores])
   const rxNumber = useMemo(() => buildRxNumber(mbti, score, agents), [mbti, score, agents])
-  const prompt = generateKarenPrompt(score, weaknesses, agents, tier.id === 'candidate', prescription)
-  const soul = generateSoul(mbti, score, weaknesses, agents, tier.id === 'candidate', prescription)
-  const rehabText = formatRehabPrescription({ score, rxNumber, topDimensionLabel, prescription })
+  const prompt = generateKarenPrompt(userName, score, weaknesses, agents, tier.id === 'candidate', prescription)
+  const soul = generateSoul(userName, mbti, score, weaknesses, agents, tier.id === 'candidate', prescription)
+  const rehabText = formatRehabPrescription({ userName, score, rxNumber, topDimensionLabel, prescription })
   const notify = (message: string) => { setToast(message); window.setTimeout(() => setToast(''), 2400) }
-  const downloadSoul = () => { const url = URL.createObjectURL(new Blob([soul], { type: 'text/markdown;charset=utf-8' })); const a = document.createElement('a'); a.href = url; a.download = `KAREN-SOUL-${mbti}.md`; a.click(); URL.revokeObjectURL(url); notify('Agent Soul 已导出') }
-  const downloadBadge = async () => { await downloadCandidateBadgePoster(mbti); notify('候补 Karen 徽章海报已生成') }
+  const downloadSoul = () => { const url = URL.createObjectURL(new Blob([soul], { type: 'text/markdown;charset=utf-8' })); const a = document.createElement('a'); a.href = url; a.download = `KAREN-SOUL-${userName}-${mbti}.md`; a.click(); URL.revokeObjectURL(url); notify('Agent Soul 已导出') }
+  const downloadBadge = async () => { await downloadCandidateBadgePoster(userName, mbti); notify('候补 Karen 徽章海报已生成') }
 
   return <section className="result-page content-container">
     <span className="micro-label">GALACTIC COMMITTEE · DETECTION REPORT</span>
     <h1>银河系争气委员会检测结果</h1>
-    <WonangScoreBadge score={score} subtitle={`MBTI / ${mbti}`} />
-    <div className="tier-copy"><span>{tier.id.toUpperCase()}</span><h2>{tier.title}</h2>{tier.copy.map((line) => <p key={line}>{line}</p>)}</div>
-    <SummonStage agents={agents} tier={tier} />
+    <div className="result-hero-share">
+      <div className="result-hero-copy">
+        <WonangScoreBadge userName={userName} score={score} subtitle={tier.title} />
+        <div className="tier-copy"><span>{tier.id.toUpperCase()} · MBTI / {mbti}</span><h2>{tier.title}</h2>{tier.copy.map((line) => <p key={line}>{line}</p>)}</div>
+      </div>
+      <div className="result-hero-visual">
+        <SummonStage agents={agents} tier={tier} />
+        <StyledSiteQRCode className="result-qr-card" size={126} />
+      </div>
+    </div>
     {tier.id === 'candidate'
       ? <div className="candidate-offer">
         <span>GALACTIC COMMITTEE OFFER</span>
@@ -57,7 +66,8 @@ export function Result({ mbti, score, tier, agents, weaknesses, dimensionScores,
       <button className="option-button" onClick={onAgents}>查看特派员档案</button>
       <button className="option-button subtle-option" onClick={onRestart}>重新检测</button>
     </div>
-    {modal === 'poster' && <CandidateBadgePoster mbti={mbti} onDownload={downloadBadge} onClose={() => setModal(null)} />}
+    <CreatorLinks compact />
+    {modal === 'poster' && <CandidateBadgePoster userName={userName} mbti={mbti} onDownload={downloadBadge} onClose={() => setModal(null)} />}
     {modal === 'prompt' && <TextModal title="我的 Karen 提示词" text={prompt} actionLabel="复制提示词" onAction={async () => { await copyText(prompt); notify('提示词已复制'); setModal(null) }} onClose={() => setModal(null)} />}
     {modal === 'soul' && <TextModal title="Agent Soul" text={soul} actionLabel="导出 .md 文件" onAction={() => { downloadSoul(); setModal(null) }} onClose={() => setModal(null)} />}
     {toast && <div className="toast">✓ {toast}</div>}

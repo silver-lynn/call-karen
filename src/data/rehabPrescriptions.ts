@@ -135,10 +135,11 @@ export function rehabExerciseNames(prescription: RehabPrescription) {
   return prescription.exercises.map((exercise) => exercise.name).join('、')
 }
 
-export function formatRehabPrescription({ score, rxNumber, topDimensionLabel, prescription }: { score: number; rxNumber: string; topDimensionLabel: string; prescription: RehabPrescription }) {
+export function formatRehabPrescription({ userName, score, rxNumber, topDimensionLabel, prescription }: { userName: string; score: number; rxNumber: string; topDimensionLabel: string; prescription: RehabPrescription }) {
   return `银河系争气委员会康复处
 处方编号：GCC-RX-${rxNumber}
 
+登记名：${userName}
 窝囊值：${score}%
 最高弱项：${topDimensionLabel}
 处方名称：${prescription.title}

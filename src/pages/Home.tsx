@@ -1,3 +1,5 @@
+import { CreatorLinks } from '../components/CreatorLinks'
+
 const earthFailureScenes = [
   '被冒犯后不敢当场说话',
   '被占便宜后先怀疑自己是不是太计较',
@@ -134,6 +136,7 @@ export function Home({ onStart, onAgents }: { onStart: () => void; onAgents: () 
           <button className="primary" onClick={onStart}>开始检测 <span>→</span></button>
         </div>
       </section>
+      <CreatorLinks />
     </section>
   </>
 }

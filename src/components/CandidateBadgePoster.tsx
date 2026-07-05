@@ -1,4 +1,6 @@
 import { assetPath } from '../lib/assets'
+import { createSiteQrDataUrl } from '../lib/siteQr'
+import { StyledSiteQRCode } from './StyledSiteQRCode'
 
 const BADGE_IMAGE = assetPath('assets/badges/candidate-karen-badge.webp')
 
@@ -48,7 +50,44 @@ function drawBadgeFallback(ctx: CanvasRenderingContext2D, x: number, y: number, 
   ctx.fillText('CANDIDATE', cx, cy + 52)
 }
 
-export async function renderCandidateBadgePoster(mbti: string) {
+function setFittedFont(ctx: CanvasRenderingContext2D, text: string, maxWidth: number, startSize: number, weight = 900) {
+  let size = startSize
+  do {
+    ctx.font = `${weight} ${size}px "Noto Sans SC", Arial, sans-serif`
+    if (ctx.measureText(text).width <= maxWidth) return
+    size -= 3
+  } while (size > 28)
+}
+
+async function drawQrPass(ctx: CanvasRenderingContext2D) {
+  const x = 760
+  const y = 1188
+  const width = 270
+  const height = 252
+  drawRoundedRect(ctx, x, y, width, height, 24)
+  ctx.fillStyle = 'rgba(4,9,15,.82)'
+  ctx.fill()
+  ctx.strokeStyle = 'rgba(216,174,98,.58)'
+  ctx.lineWidth = 2
+  ctx.stroke()
+  ctx.fillStyle = '#f1d291'
+  ctx.font = '800 22px "Noto Sans SC", Arial, sans-serif'
+  ctx.textAlign = 'center'
+  ctx.fillText('地球分部通行码', x + width / 2, y + 38)
+
+  const qrUrl = await createSiteQrDataUrl(168)
+  const qr = await loadImage(qrUrl)
+  drawRoundedRect(ctx, x + 51, y + 56, 168, 168, 14)
+  ctx.fillStyle = '#ffffff'
+  ctx.fill()
+  ctx.drawImage(qr, x + 51, y + 56, 168, 168)
+
+  ctx.fillStyle = '#b7c7d4'
+  ctx.font = '700 18px "Noto Sans SC", Arial, sans-serif'
+  ctx.fillText('扫码检测你的窝囊值', x + width / 2, y + 236)
+}
+
+export async function renderCandidateBadgePoster(userName: string, mbti: string) {
   await document.fonts?.ready
   const canvas = document.createElement('canvas')
   canvas.width = 1200
@@ -112,15 +151,18 @@ export async function renderCandidateBadgePoster(mbti: string) {
   }
 
   ctx.fillStyle = '#ffffff'
-  ctx.font = '900 72px "Noto Sans SC", Arial, sans-serif'
-  ctx.fillText(`${mbti} 里最争气的`, 600, 1012)
+  setFittedFont(ctx, userName, 860, 76)
+  ctx.fillText(userName, 600, 990)
+  ctx.fillStyle = '#f1d291'
+  setFittedFont(ctx, `${mbti} 里最争气的`, 860, 58)
+  ctx.fillText(`${mbti} 里最争气的`, 600, 1056)
 
   ctx.fillStyle = '#b7c7d4'
-  ctx.font = '600 33px "Noto Sans SC", Arial, sans-serif'
+  ctx.font = '600 30px "Noto Sans SC", Arial, sans-serif'
   const body = ['你的窝囊值为 0%。', '委员会确认：你暂不需要救助。', '现向你发出候补 Karen 邀请。']
-  body.forEach((line, index) => ctx.fillText(line, 600, 1082 + index * 46))
+  body.forEach((line, index) => ctx.fillText(line, 600, 1114 + index * 40))
 
-  drawRoundedRect(ctx, 250, 1234, 700, 118, 22)
+  drawRoundedRect(ctx, 170, 1250, 520, 118, 22)
   ctx.fillStyle = 'rgba(4,9,15,.72)'
   ctx.fill()
   ctx.strokeStyle = 'rgba(216,174,98,.55)'
@@ -128,28 +170,30 @@ export async function renderCandidateBadgePoster(mbti: string) {
   ctx.stroke()
   ctx.fillStyle = '#d8ae62'
   ctx.font = '800 27px "Noto Sans SC", Arial, sans-serif'
-  ctx.fillText('地球分部签发', 600, 1282)
+  ctx.fillText('地球分部签发', 430, 1298)
   ctx.fillStyle = '#fff7df'
   ctx.font = '900 35px "Noto Sans SC", Arial, sans-serif'
-  ctx.fillText('总教官 韩金枝', 600, 1327)
+  ctx.fillText('总教官 韩金枝', 430, 1342)
+
+  try { await drawQrPass(ctx) } catch { /* QR generation should not block poster download */ }
 
   ctx.fillStyle = '#7f94a7'
   ctx.font = '700 24px "Noto Sans SC", Arial, sans-serif'
-  ctx.fillText('总教官已注意到你。', 600, 1396)
+  ctx.fillText('总教官已注意到你。', 430, 1410)
   ctx.fillStyle = 'rgba(216,174,98,.72)'
   ctx.font = '700 19px Arial, sans-serif'
-  ctx.fillText('KEEP YOUR BACKBONE · DO NOT OVER-EXPLAIN', 600, 1428)
+  ctx.fillText('KEEP YOUR BACKBONE · DO NOT OVER-EXPLAIN', 430, 1442)
 
   return canvas.toDataURL('image/png')
 }
 
-export async function downloadCandidateBadgePoster(mbti: string) {
-  const dataUrl = await renderCandidateBadgePoster(mbti)
+export async function downloadCandidateBadgePoster(userName: string, mbti: string) {
+  const dataUrl = await renderCandidateBadgePoster(userName, mbti)
   const blob = await (await fetch(dataUrl)).blob()
   const objectUrl = URL.createObjectURL(blob)
   const anchor = document.createElement('a')
   anchor.href = objectUrl
-  anchor.download = `候补-Karen-徽章-${mbti}.png`
+  anchor.download = `候补-Karen-徽章-${userName}-${mbti}.png`
   anchor.style.display = 'none'
   document.body.appendChild(anchor)
   anchor.click()
@@ -157,7 +201,7 @@ export async function downloadCandidateBadgePoster(mbti: string) {
   window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000)
 }
 
-export function CandidateBadgePoster({ mbti, onDownload, onClose }: { mbti: string; onDownload: () => void; onClose: () => void }) {
+export function CandidateBadgePoster({ userName, mbti, onDownload, onClose }: { userName: string; mbti: string; onDownload: () => void; onClose: () => void }) {
   return <div className="poster-modal-backdrop" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && onClose()}>
     <section className="poster-modal" role="dialog" aria-modal="true" aria-label="候补 Karen 徽章海报">
       <button className="modal-close" onClick={onClose}>关闭 ×</button>
@@ -165,12 +209,14 @@ export function CandidateBadgePoster({ mbti, onDownload, onClose }: { mbti: stri
         <div className="poster-brand">银河系争气委员会</div>
         <div className="poster-title">候补 Karen 徽章</div>
         <div className="poster-badge-area"><img src={BADGE_IMAGE} alt="候补 Karen 徽章" /></div>
+        <div className="poster-user-name">{userName}</div>
         <div className="poster-dynamic-line">{mbti} 里最争气的</div>
         <div className="poster-copy">
           <p>你的窝囊值为 0%。</p>
           <p>委员会确认：你暂不需要救助。</p>
           <p>现向你发出候补 Karen 邀请。</p>
         </div>
+        <StyledSiteQRCode className="poster-qr" size={92} />
         <div className="poster-signature"><p>地球分部签发</p><p>总教官 韩金枝</p></div>
         <div className="poster-footer">总教官已注意到你。</div>
       </div>
