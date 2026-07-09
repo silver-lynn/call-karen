@@ -31,6 +31,11 @@ export type Character = {
   line: string
   mission: string
   reasonForSummon: string
+  whyArrived: string
+  resultTasks: string[]
+  ability: string
+  abilityDescription: string
+  battleRule: string
   dimensions: Dimension[]
   secrecyLevel?: string
   visibleInfo?: string[]

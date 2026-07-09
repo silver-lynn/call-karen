@@ -1,4 +1,5 @@
 import { CreatorLinks } from '../components/CreatorLinks'
+import { assetPath } from '../lib/assets'
 
 const earthFailureScenes = [
   '被冒犯后不敢当场说话',
@@ -43,7 +44,18 @@ const positiveKaren = [
 export function Home({ onStart, onAgents }: { onStart: () => void; onAgents: () => void }) {
   return <>
     <section className="hero">
-      <div className="hero-art" aria-label="六位争气特派员站在委员会舞台上"><div className="scanline" /></div>
+      <div className="hero-art" aria-label="六位争气特派员站在委员会舞台上">
+        <img
+          src={assetPath('assets/committee-hero.v2.webp')}
+          alt=""
+          width={1672}
+          height={941}
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
+        />
+        <div className="scanline" />
+      </div>
       <div className="hero-copy">
         <div className="eyebrow"><span>⚠</span> INCOMING SIGNAL / 002</div>
         <h1>银河系争气委员会<br /><em>已检测到你的信号。</em></h1>

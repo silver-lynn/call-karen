@@ -16,27 +16,49 @@ export function RehabPrescriptionCard({ prescription, rxNumber, agents }: { pres
     <div className="rehab-title-block">
       <span className="micro-label">AGENCY & BOUNDARY REHAB</span>
       <h2>主体性与边界感运动康复处方</h2>
-      <p>本处方不是医疗建议。它只负责训练你少解释一点、拒绝快一点、留证早一点、止损狠一点。</p>
+      <p><b>GCC-RX 系列训练计划</b><br />用于恢复地球个体边界系统、拒绝能力和行动反射。</p>
     </div>
-    <div className="rehab-diagnosis">
-      <b>{prescription.title}</b>
-      {prescription.diagnosis.split('\n').map((line) => <p key={line}>{line}</p>)}
+    <div className="rehab-diagnosis-grid">
+      <div className="rehab-diagnosis">
+        <span>检测诊断</span>
+        <b>{prescription.title}</b>
+        {prescription.diagnosis.split('\n').map((line) => <p key={line}>{line}</p>)}
+      </div>
+      <div className="rehab-target">
+        <span>弱点扫描</span>
+        <p>{prescription.weakPoint}</p>
+        <span>恢复目标</span>
+        <p>{prescription.recoveryGoal}</p>
+      </div>
     </div>
+    <div className="rehab-section-label"><span>DAILY TRAINING LOAD</span><b>每日训练量</b></div>
     <div className="rehab-exercises">
-      {prescription.exercises.map((exercise, index) => <article key={exercise.name}>
+      {prescription.dailyExercises.map((exercise, index) => <article key={exercise.name}>
         <span>训练 {String(index + 1).padStart(2, '0')}</span>
         <h3>{exercise.name}</h3>
         <dl>
-          <div><dt>剂量</dt><dd>{exercise.dose}</dd></div>
+          <div><dt>训练量</dt><dd>{exercise.load}</dd></div>
           <div><dt>指令</dt><dd>{exercise.instruction}</dd></div>
           <div><dt>示例</dt><dd>{exercise.example}</dd></div>
         </dl>
       </article>)}
     </div>
+    <div className="rehab-emergency">
+      <span>EMERGENCY MOVE</span>
+      <h3>{prescription.emergencyMove.skill}</h3>
+      <dl>
+        <div><dt>冷却时间</dt><dd>{prescription.emergencyMove.cooldown}</dd></div>
+        <div><dt>使用方式</dt><dd>{prescription.emergencyMove.usage}</dd></div>
+        <div><dt>效果</dt><dd>{prescription.emergencyMove.effect}</dd></div>
+      </dl>
+    </div>
     <div className="rehab-warning">
+      <b>禁止行为</b>
+      <p>{prescription.forbiddenBehavior}</p>
       <b>警示语</b>
       <p>{prescription.warning}</p>
     </div>
+    <div className="rehab-badge"><span>训练完成奖励</span><b>{prescription.completionBadge}</b><small>银河系争气委员会认证</small></div>
     <p className="rehab-executor">{executorText}</p>
   </section>
 }

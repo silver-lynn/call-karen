@@ -1,9 +1,12 @@
 import { useEffect, useMemo, useState } from 'react'
 import { SiteShell } from './components/SiteShell'
+import { chiefInstructor } from './data/characters'
 import { getResultTier } from './data/resultTiers'
 import { questionPacks } from './data/questionPacks'
+import { assetPath } from './lib/assets'
 import { assignAgents } from './lib/assignAgents'
 import { getPackId } from './lib/mbtiPack'
+import { preloadImagesWithTimeout, uniqueImageUrls } from './lib/preloadImages'
 import { calculateDimensionScores, calculateScore } from './lib/scoring'
 import { Agents } from './pages/Agents'
 import { Home } from './pages/Home'
@@ -54,7 +57,26 @@ export default function App() {
   const continueWithName = (name: string) => { setUserName(storeUserName(name)); setMbtiStep(0); setScreen('mbti'); window.scrollTo({ top: 0 }) }
   const selectMbti = (value: string) => { const next = [...mbtiParts]; next[mbtiStep] = value; setMbtiParts(next); window.setTimeout(() => setMbtiStep((step) => Math.min(4, step + 1)), 150) }
   const backMbti = () => { if (mbtiStep > 0) setMbtiStep((step) => step - 1); else setScreen('name') }
-  const answerQuestion = (id: OptionId) => { const next = [...answers]; next[questionIndex] = id; setAnswers(next); if (questionIndex < 4) window.setTimeout(() => setQuestionIndex((index) => index + 1), 170); else window.setTimeout(() => { setScreen('result'); window.scrollTo({ top: 0 }) }, 220) }
+  const answerQuestion = (id: OptionId) => {
+    const next = [...answers]
+    next[questionIndex] = id
+    setAnswers(next)
+    if (questionIndex < 4) window.setTimeout(() => setQuestionIndex((index) => index + 1), 170)
+    else window.setTimeout(async () => {
+      const nextScore = calculateScore(pack.questions, next)
+      const nextDimensionScores = calculateDimensionScores(pack.questions, next)
+      const nextTier = getResultTier(nextScore)
+      const nextAgents = assignAgents(nextDimensionScores, nextTier.count, packId)
+      const imageUrls = uniqueImageUrls([
+        assetPath('assets/committee-hero.v2.webp'),
+        ...nextAgents.flatMap((agent) => [agent.cardImage, agent.cropImage]),
+        ...(nextTier.id === 'candidate' ? [chiefInstructor.cardImage, chiefInstructor.cropImage, assetPath('assets/badges/candidate-karen-badge.webp')] : []),
+      ])
+      await preloadImagesWithTimeout(imageUrls, 800)
+      setScreen('result')
+      window.scrollTo({ top: 0 })
+    }, 220)
+  }
   const backQuestion = () => { if (questionIndex > 0) setQuestionIndex((index) => index - 1); else { setMbtiStep(4); setScreen('mbti') } }
   const home = () => { if (path !== '/') navigate('/'); setScreen('home') }
 
