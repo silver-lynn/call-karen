@@ -3,7 +3,7 @@ import { assetPath } from '../lib/assets'
 
 export const characters: Character[] = [
   {
-    id: 'bao_yulan', code: 'GCC-01', name: '包玉兰', title: '场面镇压官', sourceImage: assetPath('assets/committee-hero.v2.webp'), image: assetPath('assets/agents/cards/bao-yulan-card.webp'), cropImage: assetPath('assets/agents/crops/bao-yulan-crop.webp'), cardImage: assetPath('assets/agents/cards/bao-yulan-card.webp'),
+    id: 'bao_yulan', code: 'GCC-01', name: '包玉兰', title: '场面镇压官', sourceImage: assetPath('assets/committee-hero.v2.webp'), image: assetPath('assets/agents/cards/bao-yulan-card-v2.webp'), cropImage: assetPath('assets/agents/crops/bao-yulan-crop.webp'), cardImage: assetPath('assets/agents/cards/bao-yulan-card-v2.webp'),
     crop: { left: 640, top: 90, width: 370, height: 851 }, color: '#ff9567', areas: '公共秩序、当场表达、现场接管', commonTasks: '插队、抽烟、越界、当众冒犯、对方装聋作哑',
     disguise: '蓬松短卷发，宽肩外套，站在任何空间里都像一堵突然移动过来的墙。她不需要提高音量，周围人就会自动给她让出说话的位置。聚光灯落下时，她左眼偶尔会收缩成细长的非人类竖瞳。',
     style: '包玉兰不负责把气氛维护得很美好。她负责先让现场恢复基本秩序，再让每个人知道边界在哪里。她尤其适合处理“所有人都觉得不对，但没人先开口”的局面。',
@@ -17,7 +17,7 @@ export const characters: Character[] = [
     dimensions: ['public_order'],
   },
   {
-    id: 'ma_dali', code: 'GCC-02', name: '马大丽', title: '证据与流程专员', sourceImage: assetPath('assets/committee-hero.v2.webp'), image: assetPath('assets/agents/cards/ma-dali-card.webp'), cropImage: assetPath('assets/agents/crops/ma-dali-crop.webp'), cardImage: assetPath('assets/agents/cards/ma-dali-card.webp'),
+    id: 'ma_dali', code: 'GCC-02', name: '马大丽', title: '证据与流程专员', sourceImage: assetPath('assets/committee-hero.v2.webp'), image: assetPath('assets/agents/cards/ma-dali-card-v2.webp'), cropImage: assetPath('assets/agents/crops/ma-dali-crop.webp'), cardImage: assetPath('assets/agents/cards/ma-dali-card-v2.webp'),
     crop: { left: 50, top: 115, width: 360, height: 826 }, color: '#67e8f9', areas: '记录、时间线、平台流程、书面确认', commonTasks: '退款拖延、责任推诿、聊天记录被否认、事情说不清',
     disguise: '风衣、透明资料夹、旧手机壳，随身携带的东西看上去都很普通。但她的资料夹实际是高维档案压缩器，可以把一句含糊的话还原成时间、地点、责任人和证据链。她的影子通常比本人慢半拍。',
     style: '马大丽不爱听“我感觉对方不太对”。她会先问：什么时候发生的？谁说的？原话是什么？记录在哪？她的工作方式是把一团委屈整理成对方无法轻易抵赖的事实。',
@@ -31,7 +31,7 @@ export const characters: Character[] = [
     dimensions: ['facts', 'public_order', 'interest'],
   },
   {
-    id: 'wang_fengying', code: 'GCC-03', name: '王凤英', title: '利益谈判官', sourceImage: assetPath('assets/committee-hero.v2.webp'), image: assetPath('assets/agents/cards/wang-fengying-card.webp'), cropImage: assetPath('assets/agents/crops/wang-fengying-crop.webp'), cardImage: assetPath('assets/agents/cards/wang-fengying-card.webp'),
+    id: 'wang_fengying', code: 'GCC-03', name: '王凤英', title: '利益谈判官', sourceImage: assetPath('assets/committee-hero.v2.webp'), image: assetPath('assets/agents/cards/wang-fengying-card-v2.webp'), cropImage: assetPath('assets/agents/crops/wang-fengying-crop.webp'), cardImage: assetPath('assets/agents/cards/wang-fengying-card-v2.webp'),
     crop: { left: 350, top: 110, width: 350, height: 831 }, color: '#e5bd70', areas: '报酬、退款、押金、分工、条件确认', commonTasks: '谈钱尴尬、条件缩水、共同支出、默认白干',
     disguise: '改良西装、算盘式金属耳饰、干净利落的手指。她抬手时，空气里偶尔会浮现几秒钟的异星合约字符。她看起来像会替你算账的人，也确实会。',
     style: '王凤英不接受“先做完再说”“关系这么好还谈钱”“大家互相帮一下”这类模糊句式。她擅长把所有情分拆回范围、报价、期限、责任和结算节点。',
@@ -45,7 +45,7 @@ export const characters: Character[] = [
     dimensions: ['interest'],
   },
   {
-    id: 'tong_yuzhi', code: 'GCC-04', name: '佟玉芝', title: '话术拆弹员', sourceImage: assetPath('assets/committee-hero.v2.webp'), image: assetPath('assets/agents/cards/tong-yuzhi-card.webp'), cropImage: assetPath('assets/agents/crops/tong-yuzhi-crop.webp'), cardImage: assetPath('assets/agents/cards/tong-yuzhi-card.webp'),
+    id: 'tong_yuzhi', code: 'GCC-04', name: '佟玉芝', title: '话术拆弹员', sourceImage: assetPath('assets/committee-hero.v2.webp'), image: assetPath('assets/agents/cards/tong-yuzhi-card-v2.webp'), cropImage: assetPath('assets/agents/crops/tong-yuzhi-crop.webp'), cardImage: assetPath('assets/agents/cards/tong-yuzhi-card-v2.webp'),
     crop: { left: 915, top: 110, width: 335, height: 831 }, color: '#b89cff', areas: 'PUA、煤气灯、偷换概念、激将法、当众甩锅', commonTasks: '开始怀疑自己是不是太敏感、太较真、太难相处的时候',
     disguise: '细框眼镜、精致发夹、低调但挑不出错的打扮。她的眼镜是多层语义扫描器，瞳孔偶尔会滚动地球文字。她一旦开始沉默，通常代表对方刚刚说的话已经被拆成零件。',
     style: '佟玉芝从不急着替用户分析情绪。她先看对方用了什么句式：是在转移责任、制造愧疚、激将、否认事实，还是把自己的失礼伪装成你的敏感。她的目标是把烟雾弹拆掉，只留下可处理的核心问题。',
@@ -59,7 +59,7 @@ export const characters: Character[] = [
     dimensions: ['facts', 'rhetoric'],
   },
   {
-    id: 'zhao_meilan', code: 'GCC-05', name: '赵美兰', title: '止损总指挥', sourceImage: assetPath('assets/committee-hero.v2.webp'), image: assetPath('assets/agents/cards/zhao-meilan-card.webp'), cropImage: assetPath('assets/agents/crops/zhao-meilan-crop.webp'), cardImage: assetPath('assets/agents/cards/zhao-meilan-card.webp'),
+    id: 'zhao_meilan', code: 'GCC-05', name: '赵美兰', title: '止损总指挥', sourceImage: assetPath('assets/committee-hero.v2.webp'), image: assetPath('assets/agents/cards/zhao-meilan-card-v2.webp'), cropImage: assetPath('assets/agents/crops/zhao-meilan-crop.webp'), cardImage: assetPath('assets/agents/cards/zhao-meilan-card-v2.webp'),
     crop: { left: 1110, top: 80, width: 375, height: 861 }, color: '#7dd3fc', areas: '退出关系、暂停合作、停止沉没成本', commonTasks: '对方反复伤害、承诺不兑现、总想“再给一次机会”',
     disguise: '长外套、低跟靴、折叠伞，走路从不回头。灯光打下来时，她没有影子，只有一条缓慢后退的黑线。她看起来像刚从一个决定不再浪费时间的人生阶段走出来。',
     style: '赵美兰不负责把烂关系修复成好关系。她负责判断继续投入是否还有意义。她对“可是我已经付出很多了”没有敌意，但也不会把它当成继续留下的理由。',
@@ -73,7 +73,7 @@ export const characters: Character[] = [
     dimensions: ['exit'],
   },
   {
-    id: 'chen_yuzhen', code: 'GCC-06', name: '陈玉珍', title: '边界监察员', sourceImage: assetPath('assets/committee-hero.v2.webp'), image: assetPath('assets/agents/cards/chen-yuzhen-card.webp'), cropImage: assetPath('assets/agents/crops/chen-yuzhen-crop.webp'), cardImage: assetPath('assets/agents/cards/chen-yuzhen-card.webp'),
+    id: 'chen_yuzhen', code: 'GCC-06', name: '陈玉珍', title: '边界监察员', sourceImage: assetPath('assets/committee-hero.v2.webp'), image: assetPath('assets/agents/cards/chen-yuzhen-card-v2.webp'), cropImage: assetPath('assets/agents/crops/chen-yuzhen-crop.webp'), cardImage: assetPath('assets/agents/cards/chen-yuzhen-card-v2.webp'),
     crop: { left: 1360, top: 115, width: 312, height: 826 }, color: '#a7f3d0', areas: '拒绝、说不、停止兜底、提出要求', commonTasks: '别人把责任塞给你、不敢拒绝、总怕让人失望',
     disguise: '极简风衣，胸前佩戴一枚像居委会证件的异星徽章，手指上有印章形戒指。她没有多余动作，说话时甚至很平静，但每一个句号都像盖章。',
     style: '陈玉珍负责让用户知道：拒绝不是需要被解释的犯罪行为。她尤其擅长对付“只有你能帮我”“你做得比较快”“这次特殊情况”“别这么不近人情”等高频边界入侵话术。',
