@@ -217,7 +217,7 @@ export function CandidateBadgePoster({ userName, mbti, onDownload, onClose }: { 
           <p>委员会确认：你暂不需要救助。</p>
           <p>现向你发出候补 Karen 邀请。</p>
         </div>
-        <StyledSiteQRCode className="poster-qr" size={76} />
+        <StyledSiteQRCode className="poster-qr" size={88} caption="扫码进入 GitHub Pages" />
         <div className="poster-signature"><p>地球分部签发</p><p>总教官 韩金枝</p></div>
         <div className="poster-footer">总教官已注意到你。</div>
       </div>

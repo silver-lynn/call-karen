@@ -1,21 +1,19 @@
 import QRCode from 'qrcode'
 
-export const FALLBACK_SITE_URL = 'https://call-karen.vercel.app'
+export const GITHUB_PAGES_SITE_URL = 'https://silver-lynn.github.io/call-karen/'
+export const FALLBACK_SITE_URL = GITHUB_PAGES_SITE_URL
 
 export function getSiteUrl() {
-  if (typeof window === 'undefined') return FALLBACK_SITE_URL
-  const origin = window.location.origin
-  if (origin.includes('localhost') || origin.includes('127.0.0.1')) return FALLBACK_SITE_URL
-  return new URL(import.meta.env.BASE_URL || '/', origin).href.replace(/\/$/, '')
+  return GITHUB_PAGES_SITE_URL
 }
 
 export async function createSiteQrDataUrl(size = 104) {
   return QRCode.toDataURL(getSiteUrl(), {
-    errorCorrectionLevel: 'M',
-    margin: 1,
+    errorCorrectionLevel: 'Q',
+    margin: 2,
     width: size,
     color: {
-      dark: '#6d28d9',
+      dark: '#4c1d95',
       light: '#ffffff',
     },
   })

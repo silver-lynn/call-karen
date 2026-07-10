@@ -125,8 +125,8 @@ export function Result({ userName, mbti, score, tier, agents, weaknesses, dimens
         <p>把这份行动档案带走，或者转发给下一个需要恢复主体性的地球人。</p>
       </div>
       <div className="result-share-pass">
-        <p><b>转发给下一个地球人</b><span>紫白通行码已生成，可直接扫码进入检测站。</span></p>
-        <StyledSiteQRCode className="result-qr-card" size={88} />
+        <p><b>转发给下一个地球人</b><span>紫白通行码已生成，固定指向 GitHub Pages 检测站。</span></p>
+        <StyledSiteQRCode className="result-qr-card" size={104} caption="扫码进入 GitHub Pages" />
       </div>
       <div className="export-help-card">
         <p><b>复制 Karen 提示词</b>：粘贴给 ChatGPT / 其他 AI 后，它会按本次特派员和处方风格帮你处理现实场景。</p>
